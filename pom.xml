@@ -500,6 +500,8 @@
 				<configuration>
 					<source>${java.compiler.source}</source>
 					<target>${java.compiler.target}</target>
+			        <wtpversion>2.0</wtpversion>
+			        <wtpContextName>newContextroot</wtpContextName>
 				</configuration>
 			</plugin>
 			

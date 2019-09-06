@@ -5,9 +5,9 @@ sv\com\registroacademico\config\CrudService.class
 sv\com\registroacademico\util\enumeration\OperationType.class
 sv\com\registroacademico\config\BaseCrud.class
 sv\com\registroacademico\util\enumeration\ViewStatus.class
-sv\com\registroacademico\service\EmpleadoService.class
-sv\com\registroacademico\model\Empleado.class
-sv\com\registroacademico\model\QEmpleado.class
+sv\com\registroacademico\model\pojo\MenuPojo.class
+sv\com\registroacademico\security\SecurityController.class
+sv\com\registroacademico\model\Menu.class
 sv\com\registroacademico\config\BaseService.class
 sv\com\registroacademico\config\JPAConfiguration.class
 sv\com\registroacademico\util\web\JsfUniversalConverter.class
@@ -16,7 +16,9 @@ sv\com\registroacademico\util\AbsSpec.class
 sv\com\registroacademico\util\ValueHolder.class
 sv\com\registroacademico\util\JPAQueryJoin.class
 sv\com\registroacademico\util\GroupedFilter.class
-sv\com\registroacademico\repository\EmpleadoRepository.class
+sv\com\registroacademico\repository\MenuRepository.class
+sv\com\registroacademico\model\QMenu.class
+sv\com\registroacademico\service\MenuService.class
 sv\com\registroacademico\util\PaginatorHelper.class
 sv\com\registroacademico\util\enumeration\OperatorType.class
 sv\com\registroacademico\util\web\BaseLazyModel$1.class
