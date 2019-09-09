@@ -12,27 +12,30 @@
 		<div class="sidebar-header">
 			<h3>Registro Academico</h3>
 		</div>
-		
+
 		<h:form id="menuform">
 			<ul class="list-unstyled components">
 				<p>Building menu</p>
-				
-				
+
+
 				<ui:repeat var="menu" value="#{securityController.menuModel}">
-					<li class="active">
-						<h:panelGroup>
-						<p:commandLink styleClass="fa fa-list-alt" /><a href="#homeSubmenu_#{menu.menuElement.id}" data-toggle="collapse" aria-expanded="false" class="#{menu.childrenElements.isEmpty() ? '' : 'dropdown-toggle'} ">#{menu.menuElement.descripcion}</a>
+					<li class="active"><h:panelGroup>
+<!-- 							<p:commandLink styleClass="fa fa-list-alt" /> -->
+							<a href="#homeSubmenu_#{menu.menuElement.id}"
+								data-toggle="collapse" aria-expanded="false"
+								class="#{menu.childrenElements.isEmpty() ? '' : 'dropdown-toggle'} ">#{menu.menuElement.descripcion}</a>
 						</h:panelGroup>
-						<ul class="collapse list-unstyled" id="homeSubmenu_#{menu.menuElement.id}">
+						<ul class="collapse list-unstyled"
+							id="homeSubmenu_#{menu.menuElement.id}">
 							<ui:repeat var="menuChild" value="#{menu.childrenElements}">
-								<li><a href="#">#{menuChild.descripcion}</a></li>
+								<li><a href="#{menuChild.accion}">#{menuChild.descripcion}</a>
+								</li>
 							</ui:repeat>
-						</ul>
-					</li>
+						</ul></li>
 				</ui:repeat>
 			</ul>
 		</h:form>
-		
+
 
 	</nav>
 

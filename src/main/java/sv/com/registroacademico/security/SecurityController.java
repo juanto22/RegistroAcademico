@@ -12,9 +12,9 @@ import javax.inject.Named;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.extern.java.Log;
-import sv.com.registroacademico.model.Menu;
+import sv.com.registroacademico.model.SysMenu;
 import sv.com.registroacademico.model.pojo.MenuPojo;
-import sv.com.registroacademico.service.MenuService;
+import sv.com.registroacademico.service.SysMenuService;
 
 @Named
 @SessionScoped
@@ -29,7 +29,7 @@ public class SecurityController implements Serializable {
 	private static final long serialVersionUID = 3425014171719474763L;
 
 	@Inject
-	private MenuService menuService;
+	private SysMenuService sysMenuService;
 
 	private List<MenuPojo> menuModel;
 
@@ -46,15 +46,15 @@ public class SecurityController implements Serializable {
 	}
 
 	private void loadMenu() {
-		List<Menu> menuList = menuService.findByDependeDe(null);
-		for (Menu currentMenu : menuList) {
+		List<SysMenu> menuList = sysMenuService.findByDependeDe(null);
+		for (SysMenu currentMenu : menuList) {
 			MenuPojo menu = new MenuPojo(currentMenu, getChildrenMenu(currentMenu));
 			menuModel.add(menu);
 		}
 	}
 
-	public List<Menu> getChildrenMenu(Menu currentMenu) {
-		return menuService.findByDependeDe(currentMenu.getId());
+	public List<SysMenu> getChildrenMenu(SysMenu currentMenu) {
+		return sysMenuService.findByDependeDe(currentMenu.getId());
 	}
 
 }

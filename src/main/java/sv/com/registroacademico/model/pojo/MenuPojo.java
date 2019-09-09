@@ -6,7 +6,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import sv.com.registroacademico.model.Menu;
+import sv.com.registroacademico.model.SysMenu;
 
 @Getter
 @Setter
@@ -14,7 +14,7 @@ import sv.com.registroacademico.model.Menu;
 @AllArgsConstructor
 public class MenuPojo {
 
-	private Menu menuElement;
-	private List<Menu> childrenElements;
+	private SysMenu menuElement;
+	private List<SysMenu> childrenElements;
 
 }

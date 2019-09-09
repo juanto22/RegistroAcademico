@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.org/ui" xmlns:o="http://omnifaces.org/ui"
+	template="/template/baseLayout.xhtml">
+
+	<ui:define name="mainContent">
+		<h:form id="acreedoresForm">
+
+			<h2>Listado de Acreedores</h2>
+			<p:separator />
+			<p:dataTable id="dtAcreedores" var="acreedor" rowKey="#{acreedor.id}"
+				selection="#{acreedoresView.selectedItem}" selectionMode="single"
+				value="#{acreedoresView.acreedoresLazy}" rows="10" paginator="true"
+				paginatorPosition="bottom" lazy="true">
+
+				<p:column headerText="Acciones">
+					<p:commandButton icon="fa fa-pencil"
+						oncomplete="PF('wvAcreedores').show();"
+						actionListener="#{acreedoresView.preparedUpdate(acreedor)}"
+						update="dlgAcreedores" />
+
+					<p:commandButton icon="fa fa-trash"
+						actionListener="#{acreedoresView.delete(acreedor)}"
+						update="acreedoresForm:dtAcreedores">
+						<p:confirm header="Eliminacion"
+							message="Desea eliminar este registro?" />
+					</p:commandButton>
+				</p:column>
+
+				<p:column headerText="Codigo" filterBy="#{acreedor.nit}">
+	        		#{acreedor.nit}
+	        	</p:column>
+
+				<p:column headerText="Nombre" filterBy="#{acreedor.nombreNit}">
+	        		#{acreedor.nombreNit}
+	        	</p:column>
+
+				<!-- 				<p:column headerText="Cargo" filterBy="#{acreedor.cargo}"> -->
+				<!-- 	        		#{acreedor.cargo} -->
+				<!-- 	        	</p:column> -->
+
+				<!-- 				<p:column headerText="Salario" filterBy="#{acreedor.salario}"> -->
+				<!-- 	        		#{acreedor.salario} -->
+				<!-- 	        	</p:column> -->
+
+				<!-- 				<p:column headerText="Fecha Contratacion" -->
+				<!-- 					filterBy="#{acreedor.fechaContratacion}"> -->
+				<!-- 					<h:outputText value="#{acreedor.fechaContratacion}"> -->
+				<!-- 						<f:convertDateTime pattern="dd/MM/yyyy" /> -->
+				<!-- 					</h:outputText> -->
+				<!-- 				</p:column> -->
+
+
+			</p:dataTable>
+
+			<br />
+
+			<p:commandButton value="Nuevo" icon="fa fa-plus"
+				oncomplete="PF('wvAcreedores').show();" update="dlgAcreedores"
+				action="#{acreedoresView.preparedCreate}" process="@this" />
+
+			<br />
+			<br />
+
+
+		</h:form>
+
+		<p:dialog id="dlgAcreedores" widgetVar="wvAcreedores"
+			header="#{acreedoresView.statusView.code eq 1 ? 'Agregar' : 'Editar'} Empleado"
+			responsive="true" modal="true" width="40%" position="center"
+			closeOnEscape="true">
+
+			<h:form id="editableForm">
+				
+				<p:messages closable="true" escape="false" />
+			
+				<p:panelGrid id="pgDataEmpleado" columns="2" layout="grid">
+					<p:outputLabel value="NIT" />
+					<h:panelGroup>
+						<p:inputText id="txtNIT" maxlength="14"
+							value="#{acreedoresView.selectedItem.nit}" required="true"
+							requiredMessage="Ingrese NIT" />
+						<p:message for="txtNIT" />
+					</h:panelGroup>
+
+					<p:outputLabel value="Nombre" />
+					<h:panelGroup>
+						<p:inputText id="txtNombre"
+							value="#{acreedoresView.selectedItem.nombreNit}" required="true"
+							requiredMessage="Ingrese Nombre" />
+						<p:message for="txtNombre" />
+					</h:panelGroup>
+
+					<p:outputLabel value="¿Es Banco?" />
+					<p:selectOneRadio value="#{acreedoresView.selectedItem.esBanco}"
+						required="true" requiredMessage="Seleccione Si es Banco">
+						<f:selectItem itemValue="SI" itemLabel="Si" />
+						<f:selectItem itemValue="NO" itemLabel="No" />
+					</p:selectOneRadio>
+
+					<p:outputLabel value="¿Es AFP?" />
+					<p:selectOneRadio value="#{acreedoresView.selectedItem.esAfp}"
+						required="true" requiredMessage="Seleccione Si es AFP">
+						<f:selectItem itemValue="SI" itemLabel="Si" />
+						<f:selectItem itemValue="NO" itemLabel="No" />
+					</p:selectOneRadio>
+
+					<p:outputLabel value="¿Es Administradora de Salud?" />
+					<p:selectOneRadio value="#{acreedoresView.selectedItem.esAdmSalud}"
+						required="true" requiredMessage="Seleccione Si es Administradora de Salud">
+						<f:selectItem itemValue="SI" itemLabel="Si" />
+						<f:selectItem itemValue="NO" itemLabel="No" />
+					</p:selectOneRadio>
+
+					<p:outputLabel escape="false" value="C&#243;digo AFP" />
+					<p:inputText value="#{acreedoresView.selectedItem.codigoAfp}" maxlength="4" />
+
+					<p:outputLabel escape="false" value="C&#243;digo Salud" />
+					<p:inputText value="#{acreedoresView.selectedItem.codigoSalud}" maxlength="4" />
+
+					<p:outputLabel escape="false" value="C&#243;digo Banco" />
+					<p:inputText value="#{acreedoresView.selectedItem.codigoBanco}" maxlength="4" />
+
+
+				</p:panelGrid>
+
+				<br />
+
+				<p:commandButton value="Guardar" icon="fa fa-save"
+					rendered="#{acreedoresView.statusView.code eq 1}"
+					validateClient="true" update="@form acreedoresForm:dtAcreedores"
+					oncomplete="PF('wvAcreedores').hide();"
+					action="#{acreedoresView.save}" />
+
+				<p:commandButton value="Actualizar" icon="fa fa-save"
+					rendered="#{acreedoresView.statusView.code eq 2}"
+					validateClient="true" update="@form acreedoresForm:dtAcreedores"
+					oncomplete="PF('wvAcreedores').hide();"
+					action="#{acreedoresView.update}" />
+			</h:form>
+
+		</p:dialog>
+
+
+
+	</ui:define>
+
+</ui:composition>
