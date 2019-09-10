@@ -8,13 +8,167 @@
 	template="/template/baseLayout.xhtml">
 
 	<ui:define name="mainContent">
-		<h:form id="crudForm">
+		<h:form id="estadosPersonaForm">
 
-			<h2>Listado de Estados de la persona</h2>
+			<h2>Listado de Estados de la Persona</h2>
 			<p:separator />
 
+			<p:dataTable id="dtEstadosPersona" var="estadoPersona"
+				rowKey="#{estadoPersona.id}"
+				selection="#{estadoPersonaView.selectedItem}" selectionMode="single"
+				value="#{estadoPersonaView.estadoPersonaLazy}" sortMode="multiple"
+				rows="10" paginator="true" paginatorPosition="bottom" reflow="true"
+				lazy="true">
+
+				<p:column headerText="Acciones">
+					<p:commandButton icon="fa fa-pencil"
+						oncomplete="PF('wvEstadoPersona').show();"
+						actionListener="#{estadoPersonaView.preparedUpdate(estadoPersona)}"
+						update="dlgEstadoPersona" />
+
+					<p:commandButton icon="fa fa-trash"
+						actionListener="#{estadoPersonaView.delete(estadoPersona)}"
+						update="estadosPersonaForm:dtEstadosPersona">
+						<p:confirm header="Eliminacion"
+							message="Desea eliminar este registro?" />
+					</p:commandButton>
+				</p:column>
+
+				<p:column filterBy="#{estadoPersona.idEstadoPer}"
+					sortBy="#{estadoPersona.idEstadoPer}">
+					<f:facet name="header">
+						<h:outputText escape="false" value="C&#243;digo" />
+					</f:facet>
+	        		#{estadoPersona.idEstadoPer}
+	        	</p:column>
+
+				<p:column filterBy="#{estadoPersona.deEstado}"
+					sortBy="#{estadoPersona.deEstado}">
+					<f:facet name="header">
+						<h:outputText escape="false" value="Descripci&#243;n" />
+					</f:facet>
+	        		#{estadoPersona.deEstado}
+	        	</p:column>
+
+				<p:column headerText="¿En Planilla?"
+					filterBy="#{estadoPersona.enplanilla}"
+					sortBy="#{estadoPersona.enplanilla}">
+	        		#{estadoPersona.enplanilla}
+	        	</p:column>
+
+				<p:column headerText="¿Estado Inicial?"
+					filterBy="#{estadoPersona.estadoInicial}"
+					sortBy="#{estadoPersona.estadoInicial}">
+	        		#{estadoPersona.estadoInicial}
+	        	</p:column>
+
+				<p:column filterBy="#{estadoPersona.pensionTmp}"
+					sortBy="#{estadoPersona.pensionTmp}">
+					<f:facet name="header">
+						<h:outputText escape="false" value="¿Pensi&#243;n Temporal?" />
+					</f:facet>
+	        		#{estadoPersona.pensionTmp}
+	        	</p:column>
+
+				<p:column headerText="¿Permite Altas?"
+					filterBy="#{estadoPersona.permiteAltas}"
+					sortBy="#{estadoPersona.permiteAltas}">
+	        		#{estadoPersona.permiteAltas}
+	        	</p:column>
+
+				<p:column headerText="Vigente" filterBy="#{estadoPersona.vigente}"
+					sortBy="#{estadoPersona.vigente}">
+	        		#{estadoPersona.vigente}
+	        	</p:column>
+
+			</p:dataTable>
+
+			<br />
+
+			<p:commandButton value="Nuevo" icon="fa fa-plus"
+				oncomplete="PF('wvEstadoPersona').show();" update="dlgEstadoPersona"
+				action="#{estadoPersonaView.preparedCreate}" process="@this" />
 
 		</h:form>
+
+		<p:dialog id="dlgEstadoPersona" widgetVar="wvEstadoPersona"
+			header="#{estadoPersonaView.statusView.code eq 1 ? 'Agregar' : 'Editar'} Estado de la Persona"
+			responsive="true" modal="true" width="40%" position="center"
+			closeOnEscape="true">
+
+			<h:form id="editableForm">
+
+				<p:messages closable="true" escape="false" />
+
+				<p:panelGrid id="pgEstadoPersona" columns="2" layout="grid">
+					<p:outputLabel value="C&#243;digo" />
+					<p:inputText maxlength="5"
+						value="#{estadoPersonaView.selectedItem.idEstadoPer}"
+						required="true" requiredMessage="Ingrese C&#243;digo" />
+
+					<p:outputLabel value="Descripci&#243;n" />
+					<p:inputText maxlength="40"
+						value="#{estadoPersonaView.selectedItem.deEstado}" required="true"
+						requiredMessage="Ingrese Descripci&#243;n" />
+
+					<p:outputLabel value="¿En Planilla?" />
+					<p:selectOneRadio
+						value="#{estadoPersonaView.selectedItem.enplanilla}"
+						required="true" requiredMessage="Seleccione Vigencia">
+						<f:selectItem itemValue="SI" itemLabel="Si" />
+						<f:selectItem itemValue="NO" itemLabel="No" />
+					</p:selectOneRadio>
+
+					<p:outputLabel value="¿Es Estado Inicial?" />
+					<p:selectOneRadio
+						value="#{estadoPersonaView.selectedItem.estadoInicial}"
+						required="true" requiredMessage="Seleccione es Estado Inicial">
+						<f:selectItem itemValue="SI" itemLabel="Si" />
+						<f:selectItem itemValue="NO" itemLabel="No" />
+					</p:selectOneRadio>
+
+					<p:outputLabel value="¿Es Pensi&#243;n Temporal?" />
+					<p:selectOneRadio
+						value="#{estadoPersonaView.selectedItem.pensionTmp}"
+						required="true"
+						requiredMessage="Seleccione es Pensi&#243;n Temporal">
+						<f:selectItem itemValue="SI" itemLabel="Si" />
+						<f:selectItem itemValue="NO" itemLabel="No" />
+					</p:selectOneRadio>
+
+					<p:outputLabel value="¿Permite Altas?" />
+					<p:selectOneRadio
+						value="#{estadoPersonaView.selectedItem.permiteAltas}"
+						required="true" requiredMessage="Seleccione Permite Altas">
+						<f:selectItem itemValue="SI" itemLabel="Si" />
+						<f:selectItem itemValue="NO" itemLabel="No" />
+					</p:selectOneRadio>
+
+					<p:outputLabel value="¿Vigente?" />
+					<p:selectOneRadio value="#{estadoPersonaView.selectedItem.vigente}"
+						required="true" requiredMessage="Seleccione Vigente">
+						<f:selectItem itemValue="SI" itemLabel="Si" />
+						<f:selectItem itemValue="NO" itemLabel="No" />
+					</p:selectOneRadio>
+
+				</p:panelGrid>
+
+				<br />
+
+				<p:commandButton value="Guardar" icon="fa fa-save"
+					rendered="#{estadoPersonaView.statusView.code eq 1}"
+					update="@form estadosPersonaForm:dtEstadosPersona"
+					oncomplete="handleSubmit(xhr,status,args,'wvEstadoPersona');"
+					action="#{estadoPersonaView.save}" />
+
+				<p:commandButton value="Actualizar" icon="fa fa-save"
+					rendered="#{estadoPersonaView.statusView.code eq 2}"
+					update="@form estadosPersonaForm:dtEstadosPersona"
+					oncomplete="PF('wvEstadoPersona').hide();"
+					action="#{estadoPersonaView.update}" />
+			</h:form>
+
+		</p:dialog>
 
 
 

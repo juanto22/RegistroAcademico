@@ -14,8 +14,9 @@
 			<p:separator />
 			<p:dataTable id="dtAcreedores" var="acreedor" rowKey="#{acreedor.id}"
 				selection="#{acreedoresView.selectedItem}" selectionMode="single"
-				value="#{acreedoresView.acreedoresLazy}" rows="10" paginator="true"
-				paginatorPosition="bottom" lazy="true">
+				value="#{acreedoresView.acreedoresLazy}" sortMode="multiple"
+				rows="10" paginator="true" paginatorPosition="bottom" reflow="true"
+				lazy="true">
 
 				<p:column headerText="Acciones">
 					<p:commandButton icon="fa fa-pencil"
@@ -31,29 +32,30 @@
 					</p:commandButton>
 				</p:column>
 
-				<p:column headerText="Codigo" filterBy="#{acreedor.nit}">
+				<p:column headerText="Codigo" filterBy="#{acreedor.nit}"
+					sortBy="#{acreedor.nit}">
 	        		#{acreedor.nit}
 	        	</p:column>
 
-				<p:column headerText="Nombre" filterBy="#{acreedor.nombreNit}">
+				<p:column headerText="Nombre" filterBy="#{acreedor.nombreNit}"
+					sortBy="#{acreedor.nombreNit}">
 	        		#{acreedor.nombreNit}
 	        	</p:column>
 
-				<!-- 				<p:column headerText="Cargo" filterBy="#{acreedor.cargo}"> -->
-				<!-- 	        		#{acreedor.cargo} -->
-				<!-- 	        	</p:column> -->
+				<p:column headerText="¿Es Banco?" filterBy="#{acreedor.esBanco}"
+					sortBy="#{acreedor.esBanco}">
+	        		#{acreedor.esBanco}
+	        	</p:column>
 
-				<!-- 				<p:column headerText="Salario" filterBy="#{acreedor.salario}"> -->
-				<!-- 	        		#{acreedor.salario} -->
-				<!-- 	        	</p:column> -->
+				<p:column headerText="¿Es AFP?" filterBy="#{acreedor.esAfp}"
+					sortBy="#{acreedor.esAfp}">
+	        		#{acreedor.esAfp}
+	        	</p:column>
 
-				<!-- 				<p:column headerText="Fecha Contratacion" -->
-				<!-- 					filterBy="#{acreedor.fechaContratacion}"> -->
-				<!-- 					<h:outputText value="#{acreedor.fechaContratacion}"> -->
-				<!-- 						<f:convertDateTime pattern="dd/MM/yyyy" /> -->
-				<!-- 					</h:outputText> -->
-				<!-- 				</p:column> -->
-
+				<p:column headerText="¿Es Adm.ora de Salud?"
+					filterBy="#{acreedor.esAdmSalud}" sortBy="#{acreedor.esAdmSalud}">
+	        		#{acreedor.esAfp}
+	        	</p:column>
 
 			</p:dataTable>
 
@@ -70,30 +72,24 @@
 		</h:form>
 
 		<p:dialog id="dlgAcreedores" widgetVar="wvAcreedores"
-			header="#{acreedoresView.statusView.code eq 1 ? 'Agregar' : 'Editar'} Empleado"
+			header="#{acreedoresView.statusView.code eq 1 ? 'Agregar' : 'Editar'} Acreedor"
 			responsive="true" modal="true" width="40%" position="center"
 			closeOnEscape="true">
 
 			<h:form id="editableForm">
-				
+
 				<p:messages closable="true" escape="false" />
-			
-				<p:panelGrid id="pgDataEmpleado" columns="2" layout="grid">
+
+				<p:panelGrid id="pgAcreedor" columns="2" layout="grid">
 					<p:outputLabel value="NIT" />
-					<h:panelGroup>
-						<p:inputText id="txtNIT" maxlength="14"
-							value="#{acreedoresView.selectedItem.nit}" required="true"
-							requiredMessage="Ingrese NIT" />
-						<p:message for="txtNIT" />
-					</h:panelGroup>
+					<p:inputText id="txtNIT" maxlength="14"
+						value="#{acreedoresView.selectedItem.nit}" required="true"
+						requiredMessage="Ingrese NIT" />
 
 					<p:outputLabel value="Nombre" />
-					<h:panelGroup>
-						<p:inputText id="txtNombre"
-							value="#{acreedoresView.selectedItem.nombreNit}" required="true"
-							requiredMessage="Ingrese Nombre" />
-						<p:message for="txtNombre" />
-					</h:panelGroup>
+					<p:inputText id="txtNombre"
+						value="#{acreedoresView.selectedItem.nombreNit}" required="true"
+						requiredMessage="Ingrese Nombre" />
 
 					<p:outputLabel value="¿Es Banco?" />
 					<p:selectOneRadio value="#{acreedoresView.selectedItem.esBanco}"
@@ -111,19 +107,23 @@
 
 					<p:outputLabel value="¿Es Administradora de Salud?" />
 					<p:selectOneRadio value="#{acreedoresView.selectedItem.esAdmSalud}"
-						required="true" requiredMessage="Seleccione Si es Administradora de Salud">
+						required="true"
+						requiredMessage="Seleccione Si es Administradora de Salud">
 						<f:selectItem itemValue="SI" itemLabel="Si" />
 						<f:selectItem itemValue="NO" itemLabel="No" />
 					</p:selectOneRadio>
 
 					<p:outputLabel escape="false" value="C&#243;digo AFP" />
-					<p:inputText value="#{acreedoresView.selectedItem.codigoAfp}" maxlength="4" />
+					<p:inputText value="#{acreedoresView.selectedItem.codigoAfp}"
+						maxlength="4" />
 
 					<p:outputLabel escape="false" value="C&#243;digo Salud" />
-					<p:inputText value="#{acreedoresView.selectedItem.codigoSalud}" maxlength="4" />
+					<p:inputText value="#{acreedoresView.selectedItem.codigoSalud}"
+						maxlength="4" />
 
 					<p:outputLabel escape="false" value="C&#243;digo Banco" />
-					<p:inputText value="#{acreedoresView.selectedItem.codigoBanco}" maxlength="4" />
+					<p:inputText value="#{acreedoresView.selectedItem.codigoBanco}"
+						maxlength="4" />
 
 
 				</p:panelGrid>
@@ -132,20 +132,18 @@
 
 				<p:commandButton value="Guardar" icon="fa fa-save"
 					rendered="#{acreedoresView.statusView.code eq 1}"
-					validateClient="true" update="@form acreedoresForm:dtAcreedores"
-					oncomplete="PF('wvAcreedores').hide();"
+					update="@form acreedoresForm:dtAcreedores"
+					oncomplete="handleSubmit(xhr,status,args,'wvAcreedores');"
 					action="#{acreedoresView.save}" />
 
 				<p:commandButton value="Actualizar" icon="fa fa-save"
 					rendered="#{acreedoresView.statusView.code eq 2}"
-					validateClient="true" update="@form acreedoresForm:dtAcreedores"
+					update="@form acreedoresForm:dtAcreedores"
 					oncomplete="PF('wvAcreedores').hide();"
 					action="#{acreedoresView.update}" />
 			</h:form>
 
 		</p:dialog>
-
-
 
 	</ui:define>
 

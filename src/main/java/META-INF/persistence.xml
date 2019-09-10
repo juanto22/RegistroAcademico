@@ -7,6 +7,9 @@
 
 		<provider>org.hibernate.ejb.HibernatePersistence</provider>
 		<jta-data-source>java:jboss/datasources/RegistroAcademico</jta-data-source>
+		<class>sv.com.registroacademico.model.CgAcreedores</class>
+		<class>sv.com.registroacademico.model.CgAreaConocimiento</class>
+		<class>sv.com.registroacademico.model.CgEstadoPersona</class>
 		<class>sv.com.registroacademico.model.SysMenu</class>
 		
 		<properties>

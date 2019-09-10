@@ -30,15 +30,18 @@
 		<h:outputScript library="omnifaces" name="fixviewstate.js"
 			target="head" />
 
+		<h:outputScript library="js" name="util.js" />
+
 		<title><h:outputText escape="false"
 				value="#{applicationBundle.AppName}" /></title>
 		<ui:insert name="head" />
 	</h:head>
 
 	<h:body>
-		<h:form>
-			<p:growl id="message" sticky="false" showDetail="true"
-				autoUpdate="true" globalOnly="true" />
+		<h:form prependId="false">
+			<p:growl id="message" escape="false" globalOnly="true" showDetail="true" >
+				<p:autoUpdate />
+			</p:growl>
 
 			<p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
 				<p:commandButton value="Si" type="button"

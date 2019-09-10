@@ -1,1 +1,27 @@
+*.class
+*.idea
+# Mobile Tools for Java (J2ME)
+.mtj.tmp/
+# Package Files #
+*.jar
+*.war
+*.ear
+*.DS_Store
+*.classpath
+*.project
+*.settings
+*.tern-project
+*.metadata
+.metadata/
+.metadata
+/metadata/
+*.target
+.target/
+.target
 /target/
+*.log
+/generador/target/
+/generando.codigo/target/
+/generando.codigo/principal/target/
+.0*
+*.directory

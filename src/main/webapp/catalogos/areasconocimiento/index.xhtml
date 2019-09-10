@@ -8,15 +8,113 @@
 	template="/template/baseLayout.xhtml">
 
 	<ui:define name="mainContent">
-		<h:form id="crudForm">
+
+		<h:form id="areaConocimientoForm">
 
 			<h2>Listado de Areas de Conocimiento</h2>
 			<p:separator />
 
+			<p:dataTable id="dtAreaConocimiento" var="areaConocimiento"
+				rowKey="#{areaConocimiento.id}"
+				selection="#{areaConocimientoView.selectedItem}"
+				selectionMode="single"
+				value="#{areaConocimientoView.areaConocimientoLazy}"
+				sortMode="multiple" rows="10" paginator="true"
+				paginatorPosition="bottom" reflow="true" lazy="true">
+
+				<p:column headerText="Acciones">
+					<p:commandButton icon="fa fa-pencil"
+						oncomplete="PF('wvAreaConocimiento').show();"
+						actionListener="#{areaConocimientoView.preparedUpdate(areaConocimiento)}"
+						update="dlgAreaConocimiento" />
+
+					<p:commandButton icon="fa fa-trash"
+						actionListener="#{areaConocimientoView.delete(areaConocimiento)}"
+						update="areaConocimientoForm:dtAreaConocimiento">
+						<p:confirm header="Eliminacion"
+							message="Desea eliminar este registro?" />
+					</p:commandButton>
+				</p:column>
+
+				<p:column filterBy="#{areaConocimiento.idConocimiento}"
+					sortBy="#{areaConocimiento.idConocimiento}">
+					<f:facet name="header">
+						<h:outputText escape="false" value="C&#243;digo" />
+					</f:facet>
+	        		#{areaConocimiento.idConocimiento}
+	        	</p:column>
+
+				<p:column filterBy="#{areaConocimiento.descripcion}"
+					sortBy="#{areaConocimiento.descripcion}">
+					<f:facet name="header">
+						<h:outputText escape="false" value="Descripci&#243;n" />
+					</f:facet>
+	        		#{areaConocimiento.descripcion}
+	        	</p:column>
+
+				<p:column headerText="Vigente"
+					filterBy="#{areaConocimiento.vigente}"
+					sortBy="#{areaConocimiento.vigente}">
+	        		#{areaConocimiento.vigente}
+	        	</p:column>
+
+			</p:dataTable>
+
+			<br />
+
+			<p:commandButton value="Nuevo" icon="fa fa-plus"
+				oncomplete="PF('wvAreaConocimiento').show();"
+				update="dlgAreaConocimiento"
+				action="#{areaConocimientoView.preparedCreate}" process="@this" />
 
 		</h:form>
 
+		<p:dialog id="dlgAreaConocimiento" widgetVar="wvAreaConocimiento"
+			header="#{areaConocimientoView.statusView.code eq 1 ? 'Agregar' : 'Editar'} Area de Conocimiento"
+			responsive="true" modal="true" width="40%" position="center"
+			closeOnEscape="true">
 
+			<h:form id="editableForm">
+
+				<p:messages closable="true" escape="false" />
+
+				<p:panelGrid id="pgAreaConocimiento" columns="2" layout="grid">
+					<p:outputLabel value="C&#243;digo" />
+					<p:inputText id="txtNIT" maxlength="5"
+						value="#{areaConocimientoView.selectedItem.idConocimiento}"
+						required="true" requiredMessage="Ingrese C&#243;digo" />
+
+					<p:outputLabel value="Descripci&#243;n" />
+					<p:inputText id="txtNombre" maxlength="40"
+						value="#{areaConocimientoView.selectedItem.descripcion}"
+						required="true" requiredMessage="Ingrese Descripci&#243;n" />
+
+					<p:outputLabel value="¿Vigente?" />
+					<p:selectOneRadio
+						value="#{areaConocimientoView.selectedItem.vigente}"
+						required="true" requiredMessage="Seleccione Vigencia">
+						<f:selectItem itemValue="SI" itemLabel="Si" />
+						<f:selectItem itemValue="NO" itemLabel="No" />
+					</p:selectOneRadio>
+
+				</p:panelGrid>
+
+				<br />
+
+				<p:commandButton value="Guardar" icon="fa fa-save"
+					rendered="#{areaConocimientoView.statusView.code eq 1}"
+					update="@form areaConocimientoForm:dtAreaConocimiento"
+					oncomplete="handleSubmit(xhr,status,args,'wvAreaConocimiento');"
+					action="#{areaConocimientoView.save}" />
+
+				<p:commandButton value="Actualizar" icon="fa fa-save"
+					rendered="#{areaConocimientoView.statusView.code eq 2}"
+					update="@form areaConocimientoForm:dtAreaConocimiento"
+					oncomplete="PF('wvAreaConocimiento').hide();"
+					action="#{areaConocimientoView.update}" />
+			</h:form>
+
+		</p:dialog>
 
 	</ui:define>
 
