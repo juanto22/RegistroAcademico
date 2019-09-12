@@ -68,28 +68,24 @@
 
 		<div class="overlay"></div>
 
-		<h:outputScript library="js" name="bootstrap.min.js" />
-		<h:outputScript library="js"
-			name="jquery.mCustomScrollbar.concat.min.js" />
+<!-- 		<h:outputScript library="js" name="bootstrap.min.js" /> -->
+<!-- 		<h:outputScript library="js" -->
+<!-- 			name="jquery.mCustomScrollbar.concat.min.js" /> -->
+
+ <!-- Popper.JS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js" />
+    <!-- Bootstrap JS -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" />
 
 		<script type="text/javascript">
-			$(document).ready(function() {
-				$("#sidebar").mCustomScrollbar({
-					theme : "minimal"
-				});
-
-				$('#dismiss, .overlay').on('click', function() {
-					$('#sidebar').removeClass('active');
-					$('.overlay').removeClass('active');
-				});
-
-				$('#sidebarCollapse').on('click', function() {
-					$('#sidebar').addClass('active');
-					$('.overlay').addClass('active');
-					$('.collapse.in').toggleClass('in');
-					$('a[aria-expanded=true]').attr('aria-expanded', 'false');
-				});
-			});
+	
+			
+			$(document).ready(function () {
+	            $('#sidebarCollapse').on('click', function () {
+	                $('#sidebar').toggleClass('active');
+	                $(this).toggleClass('active');
+	            });
+	        });
 		</script>
 
 	</h:body>

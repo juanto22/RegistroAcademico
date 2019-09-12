@@ -39,7 +39,8 @@
 
 	<h:body>
 		<h:form prependId="false">
-			<p:growl id="message" escape="false" globalOnly="true" showDetail="true" >
+			<p:growl id="message" escape="false" globalOnly="true"
+				showDetail="true">
 				<p:autoUpdate />
 			</p:growl>
 
@@ -73,21 +74,43 @@
 			name="jquery.mCustomScrollbar.concat.min.js" />
 
 		<script type="text/javascript">
-			$(document).ready(function() {
+			/*$(document).ready(function() {
 				$("#sidebar").mCustomScrollbar({
 					theme : "minimal"
 				});
-
+				
 				$('#dismiss, .overlay').on('click', function() {
 					$('#sidebar').removeClass('active');
 					$('.overlay').removeClass('active');
 				});
-
+				
 				$('#sidebarCollapse').on('click', function() {
-					$('#sidebar').addClass('active');
-					$('.overlay').addClass('active');
+					$('#sidebar').toggleClass('active');
+					$(this).toggleClass('active');
 					$('.collapse.in').toggleClass('in');
 					$('a[aria-expanded=true]').attr('aria-expanded', 'false');
+				});
+			});*/
+			
+			$(document).ready(function() {
+			
+
+				$('.overlay').on('click', function() {
+					$('#sidebar').removeClass('active');
+					$('.overlay').removeClass('active');
+					$('#sidebarCollapse').removeClass('active');
+				});
+
+				$('#sidebarCollapse').on('click', function() {
+					$('#sidebar').toggleClass('active');
+					$(this).toggleClass('active');
+					var hasClass = $('.overlay').hasClass('active');
+					if(hasClass){
+						$('.overlay').removeClass('active');
+					}else{
+						$('.overlay').addClass('active');
+					}
+					
 				});
 			});
 		</script>
