@@ -39,7 +39,8 @@
 
 	<h:body>
 		<h:form prependId="false">
-			<p:growl id="message" escape="false" globalOnly="true" showDetail="true" >
+			<p:growl id="message" escape="false" globalOnly="true"
+				showDetail="true">
 				<p:autoUpdate />
 			</p:growl>
 
@@ -68,24 +69,50 @@
 
 		<div class="overlay"></div>
 
-<!-- 		<h:outputScript library="js" name="bootstrap.min.js" /> -->
-<!-- 		<h:outputScript library="js" -->
-<!-- 			name="jquery.mCustomScrollbar.concat.min.js" /> -->
-
- <!-- Popper.JS -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.0/umd/popper.min.js" />
-    <!-- Bootstrap JS -->
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/js/bootstrap.min.js" />
+		<h:outputScript library="js" name="bootstrap.min.js" />
+		<h:outputScript library="js"
+			name="jquery.mCustomScrollbar.concat.min.js" />
 
 		<script type="text/javascript">
-	
+			/*$(document).ready(function() {
+				$("#sidebar").mCustomScrollbar({
+					theme : "minimal"
+				});
+				
+				$('#dismiss, .overlay').on('click', function() {
+					$('#sidebar').removeClass('active');
+					$('.overlay').removeClass('active');
+				});
+				
+				$('#sidebarCollapse').on('click', function() {
+					$('#sidebar').toggleClass('active');
+					$(this).toggleClass('active');
+					$('.collapse.in').toggleClass('in');
+					$('a[aria-expanded=true]').attr('aria-expanded', 'false');
+				});
+			});*/
 			
-			$(document).ready(function () {
-	            $('#sidebarCollapse').on('click', function () {
-	                $('#sidebar').toggleClass('active');
-	                $(this).toggleClass('active');
-	            });
-	        });
+			$(document).ready(function() {
+			
+
+				$('.overlay').on('click', function() {
+					$('#sidebar').removeClass('active');
+					$('.overlay').removeClass('active');
+					$('#sidebarCollapse').removeClass('active');
+				});
+
+				$('#sidebarCollapse').on('click', function() {
+					$('#sidebar').toggleClass('active');
+					$(this).toggleClass('active');
+					var hasClass = $('.overlay').hasClass('active');
+					if(hasClass){
+						$('.overlay').removeClass('active');
+					}else{
+						$('.overlay').addClass('active');
+					}
+					
+				});
+			});
 		</script>
 
 	</h:body>
