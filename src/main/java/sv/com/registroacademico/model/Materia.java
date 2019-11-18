@@ -14,6 +14,7 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.persistence.UniqueConstraint;
+import javax.validation.constraints.NotNull;
 
 import org.hibernate.annotations.NotFound;
 import org.hibernate.annotations.NotFoundAction;
@@ -35,7 +36,7 @@ public class Materia implements BaseEntity<Long> {
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 3096627481406897159L;
+	private static final long serialVersionUID = 5528738108299928155L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -43,9 +44,11 @@ public class Materia implements BaseEntity<Long> {
 	private Long id;
 
 	@Column(length = 7, nullable = false)
+	@NotNull
 	private String idmateria;
 
 	@Column(name = "NOMBRE_MATERIA", length = 60, nullable = false)
+	@NotNull
 	private String nombreMateria;
 
 	@Column(name = "MAT_ACUMULADORA", length = 7)
@@ -57,8 +60,9 @@ public class Materia implements BaseEntity<Long> {
 	@Column(name = "PESO_PORCENTUAL")
 	private Double pesoPorcentual;
 
-	@Column(name = "VIGENTE_DESDE")
+	@Column(name = "VIGENTE_DESDE", nullable = false)
 	@Temporal(TemporalType.DATE)
+	@NotNull
 	private Date vigenteDesde;
 
 	@Column(name = "VIGENTE_HASTA")
@@ -68,17 +72,20 @@ public class Materia implements BaseEntity<Long> {
 	@ManyToOne
 	@NotFound(action = NotFoundAction.IGNORE)
 	@JoinColumns({ @JoinColumn(name = "PK_EMPRESA", referencedColumnName = "PK_EMPRESA", nullable = false) })
+	@NotNull
 	private Empresa empresa;
 
 	@ManyToOne
 	@NotFound(action = NotFoundAction.IGNORE)
 	@JoinColumns({
 			@JoinColumn(name = "SK_AREA_KNOWLEDGE", referencedColumnName = "PK_AREA_KNOWLEDGE", nullable = false) })
+	@NotNull
 	private CgAreaConocimiento cgAreaConocimiento;
 
 	@ManyToOne
 	@NotFound(action = NotFoundAction.IGNORE)
 	@JoinColumns({ @JoinColumn(name = "TIPOMATERIA_ID", referencedColumnName = "PK_TIPOMATERIA", nullable = false) })
+	@NotNull
 	private CgTipoMateria cgTipoMateria;
 
 }

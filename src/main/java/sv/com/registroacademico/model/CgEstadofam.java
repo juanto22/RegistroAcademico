@@ -25,7 +25,7 @@ public class CgEstadofam implements BaseEntity<Long> {
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 3096627481406897159L;
+	private static final long serialVersionUID = 750126420739417385L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)

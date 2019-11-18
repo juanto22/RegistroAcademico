@@ -25,7 +25,7 @@ public class CgMetaActLaboral implements BaseEntity<Long> {
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 3096627481406897159L;
+	private static final long serialVersionUID = 4238359173753948489L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)

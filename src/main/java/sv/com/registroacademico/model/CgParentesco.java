@@ -14,7 +14,7 @@ import lombok.ToString;
 import sv.com.registroacademico.config.BaseEntity;
 
 @Entity
-@Table(name = "CG_GRADOS")
+@Table(name = "CG_PARENTESCO")
 @EqualsAndHashCode(of = { "id" }, callSuper = false)
 @ToString(of = { "id" })
 @Getter
@@ -24,7 +24,7 @@ public class CgParentesco implements BaseEntity<Long> {
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 3096627481406897159L;
+	private static final long serialVersionUID = -6068015489351842214L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)

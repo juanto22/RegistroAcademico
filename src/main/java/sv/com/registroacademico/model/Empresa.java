@@ -13,7 +13,6 @@ import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
-import javax.persistence.UniqueConstraint;
 
 import org.hibernate.annotations.NotFound;
 import org.hibernate.annotations.NotFoundAction;
@@ -25,7 +24,7 @@ import lombok.ToString;
 import sv.com.registroacademico.config.BaseEntity;
 
 @Entity
-@Table(name = "MATERIA", uniqueConstraints = { @UniqueConstraint(columnNames = { "PK_EMPRESA", "IDMATERIA" }) })
+@Table(name = "EMPRESA")
 @EqualsAndHashCode(of = { "id" }, callSuper = false)
 @ToString(of = { "id" })
 @Getter
@@ -35,7 +34,7 @@ public class Empresa implements BaseEntity<Long> {
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 3096627481406897159L;
+	private static final long serialVersionUID = -6737580866461858444L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)

@@ -25,7 +25,7 @@ public class CgMetaGenero implements BaseEntity<Long> {
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 3096627481406897159L;
+	private static final long serialVersionUID = 4188024699834292212L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)

@@ -9,7 +9,22 @@
 		<jta-data-source>java:jboss/datasources/RegistroAcademico</jta-data-source>
 		<class>sv.com.registroacademico.model.CgAcreedores</class>
 		<class>sv.com.registroacademico.model.CgAreaConocimiento</class>
+		<class>sv.com.registroacademico.model.CgCarreras</class>
+		<class>sv.com.registroacademico.model.CgEstadofam</class>
 		<class>sv.com.registroacademico.model.CgEstadoPersona</class>
+		<class>sv.com.registroacademico.model.CgGrados</class>
+		<class>sv.com.registroacademico.model.CgMetaActLaboral</class>
+		<class>sv.com.registroacademico.model.CgMetaConvivencia</class>
+		<class>sv.com.registroacademico.model.CgMetaGenero</class>
+		<class>sv.com.registroacademico.model.CgMetaTipoSangre</class>
+		<class>sv.com.registroacademico.model.CgMetaTransporte</class>
+		<class>sv.com.registroacademico.model.CgMunicipios</class>
+		<class>sv.com.registroacademico.model.CgNivelAcademico</class>
+		<class>sv.com.registroacademico.model.CgPaises</class>
+		<class>sv.com.registroacademico.model.CgParentesco</class>
+		<class>sv.com.registroacademico.model.CgTipoMateria</class>
+		<class>sv.com.registroacademico.model.Empresa</class>
+		<class>sv.com.registroacademico.model.Materia</class>
 		<class>sv.com.registroacademico.model.SysMenu</class>
 		
 		<properties>

@@ -65,6 +65,7 @@ sv\com\registroacademico\model\QCgMetaTransporte.class
 sv\com\registroacademico\service\CgParentescoService.class
 sv\com\registroacademico\repository\CgEstadofamRepository.class
 sv\com\registroacademico\repository\CgMetaActLaboralRepository.class
+sv\com\registroacademico\view\MateriasView.class
 sv\com\registroacademico\repository\CgTipoMateriaRepository.class
 sv\com\registroacademico\model\QCgMunicipios.class
 sv\com\registroacademico\model\QCgPaises.class

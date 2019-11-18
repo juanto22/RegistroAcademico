@@ -25,7 +25,7 @@ public class CgPaises implements BaseEntity<Long> {
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 3096627481406897159L;
+	private static final long serialVersionUID = 2878619167188670119L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)

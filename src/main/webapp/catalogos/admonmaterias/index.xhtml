@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.org/ui" xmlns:o="http://omnifaces.org/ui"
+	template="/template/baseLayout.xhtml">
+
+	<ui:define name="mainContent">
+
+		<p:outputPanel id="opContent">
+
+			<p:outputPanel rendered="#{materiasView.statusView.code eq 0}">
+
+				<h:form id="materiasForm">
+
+					<h2>Portafolio de Materias Impartidas</h2>
+					<p:separator />
+
+					<p:dataTable id="dtMaterias" var="materia" rowKey="#{materia.id}"
+						selection="#{materiasView.selectedItem}" selectionMode="single"
+						value="#{materiasView.materiasLazy}" rows="10"
+						paginator="true" paginatorPosition="bottom" reflow="true"
+						lazy="true">
+
+						<p:column headerText="Acciones">
+							<p:commandButton icon="fa fa-pencil"
+								actionListener="#{materiasView.preparedUpdate(materia)}"
+								update="opContent" />
+
+							<p:commandButton icon="fa fa-trash"
+								actionListener="#{materiasView.delete(materia)}"
+								update="materiasForm:dtMaterias">
+								<p:confirm header="Eliminacion"
+									message="Desea eliminar este registro?" />
+							</p:commandButton>
+						</p:column>
+
+						<p:column filterBy="#{materia.idConocimiento}"
+							sortBy="#{materia.idConocimiento}">
+							<f:facet name="header">
+								<h:outputText escape="false" value="C&#243;digo" />
+							</f:facet>
+			        		#{materia.idmateria}
+			        	</p:column>
+
+						<p:column headerText="Nombre" filterBy="#{materia.descripcion}"
+							sortBy="#{materia.descripcion}">
+			        		#{materia.nombreMateria}
+			        	</p:column>
+
+						<p:column headerText="Tipo" filterBy="#{materia.vigente}"
+							sortBy="#{materia.vigente}">
+			        		#{materia.cgTipoMateria.detipoMateria}
+			        	</p:column>
+
+					</p:dataTable>
+
+					<br />
+
+					<p:commandButton value="Nuevo" icon="fa fa-plus"
+						oncomplete="PF('wvMateria').show();"
+						action="#{materiasView.preparedCreate}" process="@this" />
+
+				</h:form>
+			</p:outputPanel>
+
+			<p:outputPanel
+				rendered="#{materiasView.statusView.code eq 1 or materiasView.statusView.code eq 2}">
+				<ui:include src="./detail.xhtml"></ui:include>
+			</p:outputPanel>
+
+		</p:outputPanel>
+
+		<p:dialog id="dlgMaterias" widgetVar="wvMateria"
+			header="Agregar Materia" responsive="true" modal="true" width="40%"
+			position="center" closeOnEscape="true">
+
+			<h:form id="newMateriaForm">
+
+				<p:messages closable="true" escape="false" />
+
+				<p:panelGrid columns="2" layout="grid"
+					columnClasses="ui-md-2, ui-md-6">
+					<p:outputLabel value="Código" />
+					<p:inputText value="#{materiasView.selectedItem.idmateria}" />
+
+					<p:outputLabel value="Nombre" />
+					<p:inputText value="#{materiasView.selectedItem.nombreMateria}" />
+
+					<p:outputLabel value="Tipo" />
+					<p:selectOneMenu value="#{materiasView.selectedItem.cgTipoMateria}">
+						<f:selectItem itemLabel="Seleccione" />
+						<f:selectItems value="#{materiasView.tipoMateriaList}" var="tipo"
+							itemValue="#{tipo}" itemLabel="#{tipo.detipoMateria}" />
+						<f:converter converterId="jsfUniversalConverter" />
+					</p:selectOneMenu>
+
+					<p:outputLabel value="Orden Impresión" />
+					<p:spinner value="#{materiasView.selectedItem.ordenImpresion}" />
+
+					<p:outputLabel value="Área de Conocimiento" />
+					<p:selectOneMenu
+						value="#{materiasView.selectedItem.cgAreaConocimiento}">
+						<f:selectItem itemLabel="Seleccione" />
+						<f:selectItems value="#{materiasView.areasConocimientoList}"
+							var="area" itemValue="#{area}" itemLabel="#{area.descripcion}" />
+						<f:converter converterId="jsfUniversalConverter" />
+					</p:selectOneMenu>
+
+					<p:outputLabel value="Mat Acumuladora" />
+					<p:inputText value="#{materiasView.selectedItem.matAcumuladora}" />
+
+					<p:outputLabel value="Vigencia Desde" />
+					<p:calendar mask="true" pattern="dd/MM/yyyy" showOn="button"
+						value="#{materiasView.selectedItem.vigenteDesde}" />
+
+					<p:outputLabel value="Vigencia Hasta" />
+					<p:calendar mask="true" pattern="dd/MM/yyyy" showOn="button"
+						value="#{materiasView.selectedItem.vigenteHasta}" />
+
+					<p:outputLabel value="Peso Porcentual" />
+					<p:spinner value="#{materiasView.selectedItem.pesoPorcentual}" />
+
+				</p:panelGrid>
+
+				<br />
+
+				<p:commandButton value="Guardar" icon="fa fa-save"
+					update="@form materiasForm:dtMaterias"
+					oncomplete="handleSubmit(xhr,status,args,'wvMateria');"
+					actionListener="#{materiasView.save}" />
+
+				<p:commandButton value="Salir" icon="fa fa-reply" oncomplete="PF('wvMateria').hide();" />
+			</h:form>
+
+		</p:dialog>
+
+	</ui:define>
+
+</ui:composition>

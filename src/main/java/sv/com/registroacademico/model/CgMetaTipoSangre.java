@@ -14,7 +14,7 @@ import lombok.ToString;
 import sv.com.registroacademico.config.BaseEntity;
 
 @Entity
-@Table(name = "CG_GRADOS")
+@Table(name = "CGMETA_TIPO_SANGRE")
 @EqualsAndHashCode(of = { "id" }, callSuper = false)
 @ToString(of = { "id" })
 @Getter
@@ -24,7 +24,7 @@ public class CgMetaTipoSangre implements BaseEntity<Long> {
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 3096627481406897159L;
+	private static final long serialVersionUID = 6898493426758165785L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)

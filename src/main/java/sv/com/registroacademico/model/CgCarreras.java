@@ -31,7 +31,7 @@ public class CgCarreras implements BaseEntity<Long> {
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 3096627481406897159L;
+	private static final long serialVersionUID = -4000603954949642961L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)

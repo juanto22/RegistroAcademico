@@ -19,9 +19,13 @@
 .target/
 .target
 /target/
+target/
 *.log
 /generador/target/
 /generando.codigo/target/
 /generando.codigo/principal/target/
 .0*
 *.directory
+*.settings
+.settings/
+.settings

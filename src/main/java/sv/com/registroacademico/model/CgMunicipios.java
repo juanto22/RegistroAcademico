@@ -31,11 +31,11 @@ public class CgMunicipios implements BaseEntity<Long> {
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 3096627481406897159L;
+	private static final long serialVersionUID = 3268507161787681773L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "PK_ACREEDORES", nullable = false)
+	@Column(name = "PK_MUNICIPIOS", nullable = false)
 	private Long id;
 
 	@Column(length = 4, nullable = false)

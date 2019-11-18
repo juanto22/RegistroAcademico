@@ -35,10 +35,10 @@ public class SecurityController implements Serializable {
 
 	@PostConstruct
 	public void init() {
-		if (isEmptyMenu()) {
+		//if (isEmptyMenu()) {
 			menuModel = new ArrayList<>();
 			loadMenu();
-		}
+		//}
 	}
 
 	private boolean isEmptyMenu() {

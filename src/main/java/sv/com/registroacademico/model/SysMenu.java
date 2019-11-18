@@ -24,7 +24,7 @@ public class SysMenu implements BaseEntity<Long> {
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = -8603949133254020271L;
+	private static final long serialVersionUID = 3110247754069731993L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)

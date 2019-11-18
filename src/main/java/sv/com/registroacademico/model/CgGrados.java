@@ -31,7 +31,7 @@ public class CgGrados implements BaseEntity<Long> {
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 3096627481406897159L;
+	private static final long serialVersionUID = -7511759043242852105L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)

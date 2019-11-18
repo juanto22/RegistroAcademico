@@ -15,7 +15,7 @@ import lombok.ToString;
 import sv.com.registroacademico.config.BaseEntity;
 
 @Entity
-@Table(name = "CG_GRADOS", uniqueConstraints = { @UniqueConstraint(columnNames = "IDNIVEL") })
+@Table(name = "CG_NIVEL_ACADEMICO", uniqueConstraints = { @UniqueConstraint(columnNames = "IDNIVEL") })
 @EqualsAndHashCode(of = { "id" }, callSuper = false)
 @ToString(of = { "id" })
 @Getter
@@ -25,7 +25,7 @@ public class CgNivelAcademico implements BaseEntity<Long> {
 	/**
 	 * 
 	 */
-	private static final long serialVersionUID = 3096627481406897159L;
+	private static final long serialVersionUID = -477032677400298425L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
