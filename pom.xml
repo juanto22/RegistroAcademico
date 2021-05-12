@@ -43,7 +43,7 @@
 		<spring.version>4.1.6.RELEASE</spring.version>
 
 		<!--Spring Security Versión -->
-		<spring-security.version>4.0.1.RELEASE</spring-security.version>
+		<spring-security.version>5.2.10.RELEASE</spring-security.version>
 
 		<!--Spring Data Versión -->
 		<spring-data.version>1.9.0.RELEASE</spring-data.version>
