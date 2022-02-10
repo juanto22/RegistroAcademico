@@ -58,7 +58,7 @@
 		<querydsl.version>3.6.9</querydsl.version>
 
 		<!--Hibernate Version -->
-		<hibernate.version>5.3.7.Final</hibernate.version>
+		<hibernate.version>5.4.24.Final</hibernate.version>
 
 		<!--Hibernate Commons Anotations Version -->
 		<hibernate-commons-annotations.version>4.0.5.Final</hibernate-commons-annotations.version>
