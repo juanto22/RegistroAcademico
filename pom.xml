@@ -46,7 +46,7 @@
 		<spring-security.version>4.0.1.RELEASE</spring-security.version>
 
 		<!--Spring Data Versión -->
-		<spring-data.version>1.9.0.RELEASE</spring-data.version>
+		<spring-data.version>1.11.23.RELEASE</spring-data.version>
 
 		<!--Spring LDAP Versión -->
 		<spring-ldap.version>2.0.2.RELEASE</spring-ldap.version>
